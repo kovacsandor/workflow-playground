@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StageId } from '../enum/StageId';
-import { IWorkflowStage } from '../interface/IWorkflowStage';
-import { fetchWorkflow } from '../utility/fetchWorkflow';
+import { IWorkflowStage, StageId } from 'shared';
+import { fetchWorkflowById } from '../utility/fetchWorkflow';
 
 export function App(): JSX.Element {
 
@@ -13,7 +12,7 @@ export function App(): JSX.Element {
 
             async function fetch(): Promise<void> {
 
-                setWorkflow(await fetchWorkflow());
+                setWorkflow(await fetchWorkflowById('test-id'));
                 setCurrentStageId(getStartStageId())
             }
 
