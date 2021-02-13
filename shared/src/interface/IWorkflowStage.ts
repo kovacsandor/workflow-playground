@@ -1,4 +1,4 @@
-import { StageId } from "../enum/StageId";
+import { StageId } from '../enum/StageId';
 
 export interface IWorkflowStage {
     readonly id: string;

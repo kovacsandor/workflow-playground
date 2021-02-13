@@ -1,5 +1,5 @@
-import { IWorkflow } from "./IWorkflow";
+import { IWorkflow } from './IWorkflow';
 
 export interface IGetWorkflowByIdResponseBody {
-    readonly workflow: IWorkflow
+    readonly workflow: IWorkflow;
 }
