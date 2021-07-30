@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IWorkflowStage, StageId } from 'shared';
+import { IWorkflowStage, StageId } from 'workflow-playground-shared';
 import { fetchWorkflowById } from '../utility/fetchWorkflow';
 
 export function App(): JSX.Element {
@@ -35,11 +35,13 @@ export function App(): JSX.Element {
     }
 
     function onClickNext(nextId: string): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
             setCurrentStageId(nextId);
         };
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function onClickReset(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
         setCurrentStageId(null);
         setWorkflow(null);

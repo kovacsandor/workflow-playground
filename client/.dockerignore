@@ -1,0 +1,10 @@
+build
+node_modules
+.dockerignore
+.eslintcache
+.eslintignore
+.eslintrc.js
+.gitignore
+.prettierrc.js
+Dockerfile
+README.md

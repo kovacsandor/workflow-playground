@@ -1,4 +1,4 @@
-import { IWorkflowStage } from 'shared';
+import { IWorkflowStage } from 'workflow-playground-shared';
 import { fetchWorkflowById } from './fetchWorkflow';
 
 test('returns a list of at least 1 stages', async (): Promise<void> => {

@@ -1,4 +1,4 @@
-import { IWorkflow, StageId } from 'shared';
+import { IWorkflow, StageId } from 'workflow-playground-shared';
 import { getMockData } from './getMockData';
 
 export function getWorkflowById(id: string): Promise<IWorkflow> {
