@@ -1,9 +1,9 @@
 import { IWorkflow, StageId } from 'workflow-playground-shared';
-import { getMockData } from './getMockData';
+import { generateId } from './generateId';
 
-export function getWorkflowById(id: string): Promise<IWorkflow> {
+export function getNewWorkflow(): IWorkflow {
     const workflow: IWorkflow = {
-        id,
+        id: generateId(),
         stages: [
             {
                 id: StageId.TODO,
@@ -28,5 +28,5 @@ export function getWorkflowById(id: string): Promise<IWorkflow> {
         ],
     };
 
-    return getMockData(workflow);
+    return workflow;
 }

@@ -2,10 +2,10 @@ import cors from 'cors';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { IGetWorkflowByIdResponseBody, IWorkflow } from 'workflow-playground-shared';
-import { getWorkflowById } from './getWorkflowById';
+import { listen } from './handler/listen';
+import { WorkflowModel } from './model/WorkflowModel';
 
 const application: Express = express();
-const port = 8080;
 
 interface IGetWorkflowByIdRequestParams {
     readonly id: string;
@@ -22,12 +22,10 @@ application.get(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: NextFunction,
     ): Promise<void> => {
-        const workflow: IWorkflow = await getWorkflowById(req.params.id);
+        const workflow: IWorkflow = await WorkflowModel.findOne({ id: req.params.id });
 
         res.json({ workflow });
     },
 );
 
-application.listen(port, (): void => {
-    console.log(`Listening at http://localhost:${port}`);
-});
+listen(application);

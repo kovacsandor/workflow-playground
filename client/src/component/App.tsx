@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { IWorkflowStage, StageId } from 'workflow-playground-shared';
-import { fetchWorkflowById } from '../utility/fetchWorkflow';
+import { IWorkflowStage, IWorkflow, StageId } from 'workflow-playground-shared';
+import { fetchWorkflowById } from '../utility/fetchWorkflowById';
 
 export function App(): JSX.Element {
     const [currentStageId, setCurrentStageId] = useState<string | null>(null);
-    const [workflow, setWorkflow] = useState<IWorkflowStage[] | null>(null);
+    const [workflow, setWorkflow] = useState<IWorkflow | null>(null);
 
     useEffect((): void => {
         async function fetch(): Promise<void> {
-            setWorkflow(await fetchWorkflowById('test-id'));
+            setWorkflow(await fetchWorkflowById('610418073e64d745dadf812e'));
             setCurrentStageId(getStartStageId());
         }
 
@@ -23,7 +23,7 @@ export function App(): JSX.Element {
     }
 
     function getStage(stageId: string | null): IWorkflowStage | undefined {
-        return workflow?.find((stage: IWorkflowStage): boolean => stage.id === stageId);
+        return workflow?.stages?.find((stage: IWorkflowStage): boolean => stage.id === stageId);
     }
 
     function getStageName(stageId: string | null): string | undefined {
