@@ -1,7 +1,5 @@
 import { Express } from 'express';
-import { getNewWorkflow } from '../utility/getNewWorkflow';
 import { connect } from 'mongoose';
-import { WorkflowModel } from '../model/WorkflowModel';
 
 export function listen(application: Express): void {
     application.listen(
@@ -10,7 +8,6 @@ export function listen(application: Express): void {
             console.log(`Listening at http://localhost:${process.env.PORT}`);
 
             await connectToDatabase();
-            await initializeDatabaseWithMockData(); // temporary
         },
     );
 }
@@ -25,14 +22,4 @@ async function connectToDatabase(): Promise<void> {
     });
 
     console.log(`Connected to database: ${mongoConnection}`);
-}
-
-// temporary
-async function initializeDatabaseWithMockData(): Promise<void> {
-    const count = await WorkflowModel.countDocuments();
-
-    if (count === 0) {
-        await WorkflowModel.insertMany([getNewWorkflow()]);
-        console.log('Database initialized');
-    }
 }

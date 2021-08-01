@@ -1,7 +1,8 @@
-import { StageId } from '../enum/StageId';
+import { StageType } from '../enum/StageType';
 
 export interface IWorkflowStage {
     readonly id: string;
     readonly name: string;
-    readonly nextIds: StageId[];
+    readonly nextIds: string[];
+    readonly type: StageType;
 }

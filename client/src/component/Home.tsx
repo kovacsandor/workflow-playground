@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchWorkflows } from '../utility/fetchWorkflows';
 import { IWorkflow } from 'workflow-playground-shared';
+import { Spinner } from './Spinner';
 
 export function Home(): JSX.Element {
     const [workflows, setWorkflows] = useState<IWorkflow[] | null>(null);
@@ -18,15 +19,20 @@ export function Home(): JSX.Element {
 
     return (
         <>
-            {workflows
-                ? workflows.map(
-                      (workflow: IWorkflow): JSX.Element => (
-                          <Link key={workflow.id} to={`/workflow/${workflow.id}`}>
-                              {workflow.id}
-                          </Link>
-                      ),
-                  )
-                : 'Loading...'}
+            <h2>Workflows</h2>
+            {workflows ? (
+                <ul>
+                    {workflows.map(
+                        (workflow: IWorkflow): JSX.Element => (
+                            <li key={workflow.id}>
+                                <Link to={`/workflow/${workflow.id}`}>{workflow.id}</Link>
+                            </li>
+                        ),
+                    )}
+                </ul>
+            ) : (
+                <Spinner />
+            )}
         </>
     );
 }

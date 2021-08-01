@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { IWorkflowStage, IWorkflow, StageId } from 'workflow-playground-shared';
+import { IWorkflowStage, IWorkflow, StageType } from 'workflow-playground-shared';
 import { fetchWorkflowById } from '../utility/fetchWorkflowById';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Spinner } from './Spinner';
 
 export function Workflow(): JSX.Element {
     const [currentStageId, setCurrentStageId] = useState<string | null>(null);
     const [workflow, setWorkflow] = useState<IWorkflow | null>(null);
+    const { id } = useParams<{ readonly id: string }>();
 
     useEffect((): void => {
         async function fetch(): Promise<void> {
-            setWorkflow(await fetchWorkflowById('610418073e64d745dadf812e'));
-            setCurrentStageId(getStartStageId());
+            const workflow: IWorkflow = await fetchWorkflowById(id);
+
+            setWorkflow(workflow);
+            setCurrentStageId(getStartStageId(workflow));
         }
 
         if (!workflow) {
             fetch();
         }
-    }, [workflow]);
+    }, [id, workflow]);
 
-    // todo - calculate start stage id
-    function getStartStageId(): string {
-        return StageId.TODO;
+    function getStartStageId(workflow: IWorkflow): string | null {
+        return workflow?.stages.find((stage: IWorkflowStage): boolean => stage.type === StageType.Todo)?.id || null;
     }
 
     function getStage(stageId: string | null): IWorkflowStage | undefined {
@@ -69,9 +72,8 @@ export function Workflow(): JSX.Element {
                     )}
                 </>
             ) : (
-                'Loading...'
+                <Spinner />
             )}
-            <Link to="/">Home</Link>
         </>
     );
 }

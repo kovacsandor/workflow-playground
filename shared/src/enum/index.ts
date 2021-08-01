@@ -1,1 +1,1 @@
-export * from './StageId';
+export * from './StageType';

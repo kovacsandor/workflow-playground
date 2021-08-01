@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { IGetWorkflowsResponseBody, IWorkflow } from 'workflow-playground-shared';
+import { getRouteApiGetWorkflows, IGetWorkflowsResponseBody, IWorkflow } from 'workflow-playground-shared';
+import { getApiUrl } from './getApiUrl';
 
 export async function fetchWorkflows(): Promise<IWorkflow[]> {
-    const axiosResponse = await axios.get<IGetWorkflowsResponseBody>(
-        `${process.env.REACT_APP_SERVER_URL_ORIGIN}/api/workflows`,
-    );
+    const axiosResponse = await axios.get<IGetWorkflowsResponseBody>(getApiUrl(getRouteApiGetWorkflows()));
 
     return axiosResponse.data.workflows;
 }

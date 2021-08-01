@@ -28,6 +28,6 @@
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "typescript": "^4.1.5",
-    "workflow-playground-shared": "0.0.3"
+    "workflow-playground-shared": "0.0.5"
   }
 }
