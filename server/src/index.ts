@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
-import { IGetWorkflowByIdResponseBody, IWorkflow } from 'workflow-playground-shared';
+import { IGetWorkflowByIdResponseBody, IGetWorkflowsResponseBody, IWorkflow } from 'workflow-playground-shared';
 import { listen } from './handler/listen';
 import { WorkflowModel } from './model/WorkflowModel';
 
@@ -13,6 +13,20 @@ interface IGetWorkflowByIdRequestParams {
 
 application.use(cors());
 application.use(morgan('combined'));
+
+application.get(
+    '/api/workflows',
+    async (
+        req: Request,
+        res: Response<IGetWorkflowsResponseBody>,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        next: NextFunction,
+    ): Promise<void> => {
+        const workflows: IWorkflow[] = await WorkflowModel.find();
+
+        res.json({ workflows });
+    },
+);
 
 application.get(
     '/api/workflow/:id',
