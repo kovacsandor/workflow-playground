@@ -55,10 +55,11 @@ export function Workflow(): JSX.Element {
         <>
             {workflow ? (
                 <>
-                    <h2>Current stage: {getStageName(currentStageId) || ''}</h2>
+                    <h2>Workflow: {workflow.id}</h2>
+                    <h3>Current stage: {getStageName(currentStageId) || ''}</h3>
                     {getWorkflowFinished() ? (
                         <>
-                            <h3>Go to stage</h3>
+                            {getStage(currentStageId)?.type !== StageType.Finished && <h4>Go to stage</h4>}
                             {getStage(currentStageId)?.nextIds.map(
                                 (nextId: string): JSX.Element => (
                                     <button key={nextId} onClick={onClickNext(nextId)}>
